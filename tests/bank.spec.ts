@@ -7,12 +7,6 @@ const fullName = `${firstName} ${lastName}`;
 const depAmt = 10000;
 const withAmt = 0.2 * depAmt;
 
-test.use({
-    browserName: 'chromium',
-    launchOptions: {
-        headless: false
-    }
-})
 
 async function navigateToBankingProject(page:Page) {
     await page.goto('https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login');
@@ -94,4 +88,5 @@ test('Open page', async ({ page }) => {
     await makeWithdrawal(page);
     await assertCorrectBalance(page, '8000');
     await deleteCustomer(page);
+    expect(await page.isVisible(`${firstName} ${lastName}`)).toBeFalsy();
 })
